@@ -1,2 +1,4 @@
-bin
+bin/*.exe
+bin/*.pdb
+bin/*.ilk
 build

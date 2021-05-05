@@ -35,4 +35,25 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${PROJECT_SOURCE_DIR}/lib")
 # 开启 VS 的文件夹功能
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+include(FetchContent)
+FetchContent_Declare(
+  CMakeToolkit
+  GIT_REPOSITORY https://github.com/ihuangx/CMakeToolkit.git
+  GIT_TAG        aafb6b1
+)
+FetchContent_MakeAvailable(CMakeToolkit)
+
+CMakeGit_InitGit()
+CMakeGit_UpdateSubmodule()
+
+# SDL2 library
+set(SDL2_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/external/SDL/include")
+set(SDL2_LIBRARY "${PROJECT_SOURCE_DIR}/lib/SDL/x64/SDL2.lib")
+set(SDL2MAIN_LIBRARY "${PROJECT_SOURCE_DIR}/lib/SDL/x64/SDL2main.lib")
+
+# find package SDL2
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/modules")
+find_package(SDL2 REQUIRED)
+include_directories(${SDL2_INCLUDE_DIR})
+
 add_subdirectory(source)
